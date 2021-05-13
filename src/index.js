@@ -7,8 +7,8 @@ import "react-app-polyfill/stable";
 import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import * as _redux from "./redux";
-import store, { persistor } from "./redux/store";
+// import * as _redux from "./redux";
+// import store, { persistor } from "./redux/store";
 import App from "./app/App";
 import "./index.scss"; // Standard version
 // import "./sass/style.react.rtl.css"; // RTL version
@@ -39,21 +39,21 @@ const { PUBLIC_URL } = process.env;
  *
  * @see https://github.com/ctimmerm/axios-mock-adapter
  */
-/* const mock = */ _redux.mockAxios(axios);
+// /* const mock = */ _redux.mockAxios(axios);
 
 /**
  * Inject metronic interceptors for axios.
  *
  * @see https://github.com/axios/axios#interceptors
  */
-_redux.setupAxios(axios, store);
+// _redux.setupAxios(axios, store);
 
 ReactDOM.render(
   <MetronicI18nProvider>
     <MetronicLayoutProvider>
       <MetronicSubheaderProvider>
         <MetronicSplashScreenProvider>
-          <App store={store} persistor={persistor} basename={PUBLIC_URL} />
+          <App store={{}} persistor={{}} basename={PUBLIC_URL} />
         </MetronicSplashScreenProvider>
       </MetronicSubheaderProvider>
     </MetronicLayoutProvider>

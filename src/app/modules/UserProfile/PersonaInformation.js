@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, shallowEqual, connect, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ModalProgressBar } from "../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../_metronic/_helpers";
-import * as auth from "../Auth";
 
 function PersonaInformation(props) {
   // Fields
   const [loading, setloading] = useState(false);
   const [pic, setPic] = useState("");
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user, shallowEqual);
+  const user = {
+    pic: 'https://st4.depositphotos.com/12982378/22072/i/600/depositphotos_220729084-stock-photo-smiling-adult-man-crossed-arms.jpg',
+    firstName: 'Mohammed',
+    lastName: 'Jaber',
+    occupation: 'React developer',
+    email: 'mohjbr.dev@gmail.com'
+  };
   useEffect(() => {
     if (user.pic) {
       setPic(user.pic);
@@ -23,7 +26,7 @@ function PersonaInformation(props) {
     setloading(true);
     const updatedUser = Object.assign(user, values);
     // user for update preparation
-    dispatch(props.setUser(updatedUser));
+    // dispatch(props.setUser(updatedUser));
     setTimeout(() => {
       setloading(false);
       setSubmitting(false);
@@ -42,8 +45,8 @@ function PersonaInformation(props) {
   // UI Helpers
   const initialValues = {
     pic: user.pic,
-    firstname: user.firstname,
-    lastname: user.lastname,
+    firstname: user.firstName,
+    lastname: user.lastName,
     companyName: user.companyName,
     phone: user.phone,
     email: user.email,
@@ -347,4 +350,4 @@ function PersonaInformation(props) {
   );
 }
 
-export default connect(null, auth.actions)(PersonaInformation);
+export default PersonaInformation;

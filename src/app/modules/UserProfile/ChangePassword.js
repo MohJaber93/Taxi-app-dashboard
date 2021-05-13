@@ -1,20 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, shallowEqual, connect, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import SVG from "react-inlinesvg";
 import { ModalProgressBar } from "../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../_metronic/_helpers";
-import * as auth from "../Auth";
 
 function ChangePassword(props) {
   // Fields
   const [loading, setloading] = useState(false);
   const [isError, setisError] = useState(false);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user, shallowEqual);
+  const user = {
+    pic: 'https://st4.depositphotos.com/12982378/22072/i/600/depositphotos_220729084-stock-photo-smiling-adult-man-crossed-arms.jpg',
+    firstName: 'Mohammed',
+    lastName: 'Jaber',
+    occupation: 'React developer',
+    email: 'mohjbr.dev@gmail.com'
+  };
   useEffect(() => {}, [user]);
   // Methods
   const saveUser = (values, setStatus, setSubmitting) => {
@@ -24,7 +27,7 @@ function ChangePassword(props) {
       password: values.password,
     });
     // user for update preparation
-    dispatch(props.setUser(updatedUser));
+    // dispatch(props.setUser(updatedUser));
     setTimeout(() => {
       setloading(false);
       setSubmitting(false);
@@ -225,4 +228,4 @@ function ChangePassword(props) {
   );
 }
 
-export default connect(null, auth.actions)(ChangePassword);
+export default ChangePassword;

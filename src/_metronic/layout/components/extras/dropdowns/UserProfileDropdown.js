@@ -3,14 +3,19 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
-import { useSelector } from "react-redux";
 import objectPath from "object-path";
 import { useHtmlClassService } from "../../../_core/MetronicLayout";
 import { toAbsoluteUrl } from "../../../../_helpers";
 import { DropdownTopbarItemToggler } from "../../../../_partials/dropdowns";
 
 export function UserProfileDropdown() {
-  const { user } = useSelector((state) => state.auth);
+  const user = {
+    pic: 'https://st4.depositphotos.com/12982378/22072/i/600/depositphotos_220729084-stock-photo-smiling-adult-man-crossed-arms.jpg',
+    firstName: 'Mohammed',
+    lastName: 'Jaber',
+    occupation: 'React developer',
+    email: 'mohjbr.dev@gmail.com'
+  };
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -35,11 +40,11 @@ export function UserProfileDropdown() {
             Hi,
           </span>{" "}
           <span className="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4">
-            {user.firstname} {user.lastname}
+            {user.firstName} {user.lastName}
           </span>
           <span className="symbol symbol-35">
             <span className="symbol-label text-white font-size-h5 font-weight-bold bg-white-o-30">
-              {user.firstname[0]}
+              {user.firstName[0]}
             </span>
           </span>
         </div>
@@ -54,7 +59,7 @@ export function UserProfileDropdown() {
                   <img src={toAbsoluteUrl("/media/users/300_21.jpg")} alt="" />
                 </div>
                 <div className="text-dark m-0 flex-grow-1 mr-3 font-size-h5">
-                  {user.firstname} {user.lastname}
+                  {user.firstName} {user.lastName}
                 </div>
                 <span className="label label-light-success label-lg font-weight-bold label-inline">
                   3 messages
@@ -75,12 +80,12 @@ export function UserProfileDropdown() {
             >
               <div className="symbol bg-white-o-15 mr-3">
                 <span className="symbol-label text-success font-weight-bold font-size-h4">
-                  {user.firstname[0]}
+                  {user.firstName[0]}
                 </span>
                 {/*<img alt="Pic" className="hidden" src={user.pic} />*/}
               </div>
               <div className="text-white m-0 flex-grow-1 mr-3 font-size-h5">
-                {user.firstname} {user.lastname}
+                {user.firstName} {user.lastName}
               </div>
               <span className="label label-success label-lg font-weight-bold label-inline">
                 3 messages

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, shallowEqual, connect, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ModalProgressBar } from "../../../_metronic/_partials/controls";
-import * as auth from "../Auth";
 
 function EmailSettings(props) {
   // Fields
   const [loading, setloading] = useState(false);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user, shallowEqual);
+  const user = {
+    pic: 'https://st4.depositphotos.com/12982378/22072/i/600/depositphotos_220729084-stock-photo-smiling-adult-man-crossed-arms.jpg',
+    firstName: 'Mohammed',
+    lastName: 'Jaber',
+    occupation: 'React developer',
+    email: 'mohjbr.dev@gmail.com'
+  };
   useEffect(() => {}, [user]);
   // Methods
   const saveUser = (values, setStatus, setSubmitting) => {
@@ -40,7 +43,7 @@ function EmailSettings(props) {
       },
     });
     // user for update preparation
-    dispatch(props.setUser(updatedUser));
+    // dispatch(props.setUser(updatedUser));
     setTimeout(() => {
       setloading(false);
       setSubmitting(false);
@@ -58,32 +61,32 @@ function EmailSettings(props) {
   };
   // UI Helpers
   const initialValues = {
-    emailNotification: user.emailSettings.emailNotification,
-    sendCopyToPersonalEmail: user.emailSettings.sendCopyToPersonalEmail,
+    emailNotification: user.emailSettings?.emailNotification,
+    sendCopyToPersonalEmail: user.emailSettings?.sendCopyToPersonalEmail,
     youHaveNewNotifications:
-      user.emailSettings.activityRelatesEmail.youHaveNewNotifications,
+      user.emailSettings?.activityRelatesEmail?.youHaveNewNotifications,
     youAreSentADirectMessage:
-      user.emailSettings.activityRelatesEmail.youAreSentADirectMessage,
+      user.emailSettings?.activityRelatesEmail?.youAreSentADirectMessage,
     someoneAddsYouAsAsAConnection:
-      user.emailSettings.activityRelatesEmail.someoneAddsYouAsAsAConnection,
-    uponNewOrder: user.emailSettings.activityRelatesEmail.uponNewOrder,
+      user.emailSettings?.activityRelatesEmail?.someoneAddsYouAsAsAConnection,
+    uponNewOrder: user.emailSettings?.activityRelatesEmail?.uponNewOrder,
     newMembershipApproval:
-      user.emailSettings.activityRelatesEmail.newMembershipApproval,
+      user.emailSettings?.activityRelatesEmail?.newMembershipApproval,
     memberRegistration:
-      user.emailSettings.activityRelatesEmail.memberRegistration,
+      user.emailSettings?.activityRelatesEmail?.memberRegistration,
     newsAboutKeenthemesProductsAndFeatureUpdates:
-      user.emailSettings.updatesFromKeenthemes
-        .newsAboutKeenthemesProductsAndFeatureUpdates,
+      user.emailSettings?.updatesFromKeenthemes
+        ?.newsAboutKeenthemesProductsAndFeatureUpdates,
     tipsOnGettingMoreOutOfKeen:
-      user.emailSettings.updatesFromKeenthemes.tipsOnGettingMoreOutOfKeen,
+      user.emailSettings?.updatesFromKeenthemes?.tipsOnGettingMoreOutOfKeen,
     thingsYouMissedSindeYouLastLoggedIntoKeen:
-      user.emailSettings.updatesFromKeenthemes
-        .thingsYouMissedSindeYouLastLoggedIntoKeen,
+      user?.emailSettings?.updatesFromKeenthemes
+        ?.thingsYouMissedSindeYouLastLoggedIntoKeen,
     newsAboutMetronicOnPartnerProductsAndOtherServices:
-      user.emailSettings.updatesFromKeenthemes
-        .newsAboutMetronicOnPartnerProductsAndOtherServices,
+      user?.emailSettings?.updatesFromKeenthemes
+        ?.newsAboutMetronicOnPartnerProductsAndOtherServices,
     tipsOnMetronicBusinessProducts:
-      user.emailSettings.updatesFromKeenthemes.tipsOnMetronicBusinessProducts,
+      user?.emailSettings?.updatesFromKeenthemes?.tipsOnMetronicBusinessProducts,
   };
   const Schema = Yup.object().shape({
     emailNotification: Yup.bool(),
@@ -351,4 +354,4 @@ function EmailSettings(props) {
   );
 }
 
-export default connect(null, auth.actions)(EmailSettings);
+export default EmailSettings;

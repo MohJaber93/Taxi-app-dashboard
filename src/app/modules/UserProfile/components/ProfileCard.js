@@ -11,7 +11,13 @@ import {
 } from "../../../../_metronic/_partials/dropdowns";
 
 export function ProfileCard() {
-  const user = useSelector(({ auth }) => auth.user, shallowEqual);
+  const user = {
+    pic: 'https://st4.depositphotos.com/12982378/22072/i/600/depositphotos_220729084-stock-photo-smiling-adult-man-crossed-arms.jpg',
+    firstName: 'Mohammed',
+    lastName: 'Jaber',
+    occupation: 'React developer',
+    email: 'mohjbr.dev@gmail.com'
+  };
 
   useEffect(() => {
     return () => {};
@@ -60,7 +66,7 @@ export function ProfileCard() {
                     href="#"
                     className="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"
                   >
-                    {user.firstname} {user.lastname}
+                    {user.firstName} {user.lastName}
                   </a>
                   <div className="text-muted">{user.occupation}</div>
                   <div className="mt-2">
@@ -90,11 +96,11 @@ export function ProfileCard() {
                 </div>
                 <div className="d-flex align-items-center justify-content-between mb-2">
                   <span className="font-weight-bold mr-2">Phone:</span>
-                  <span className="text-muted">{user.phone}</span>
+                  <span className="text-muted">{user.phone ||597195692 }</span>
                 </div>
                 <div className="d-flex align-items-center justify-content-between">
                   <span className="font-weight-bold mr-2">Location:</span>
-                  <span className="text-muted">{user.address.city}</span>
+                  <span className="text-muted">{user.address?.city || "Gaza"}</span>
                 </div>
               </div>
               {/* end::Contact */}

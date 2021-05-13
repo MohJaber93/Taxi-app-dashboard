@@ -8,7 +8,13 @@ import { useHtmlClassService } from "../../_core/MetronicLayout";
 import { UserProfileDropdown } from "./dropdowns/UserProfileDropdown";
 
 export function QuickUserToggler() {
-  const { user } = useSelector((state) => state.auth, shallowEqual);
+  const user = {
+    pic: 'https://st4.depositphotos.com/12982378/22072/i/600/depositphotos_220729084-stock-photo-smiling-adult-man-crossed-arms.jpg',
+    firstName: 'Mohammed',
+    lastName: 'Jaber',
+    occupation: 'React developer',
+    email: 'mohjbr.dev@gmail.com'
+  };
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -33,11 +39,11 @@ export function QuickUserToggler() {
                 Hi,
               </span>
               <span className="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4">
-                {user.firsname} {user.lastname}
+                {user.firsName} {user.lastName}
               </span>
               <span className="symbol symbol-35">
                 <span className="symbol-label text-white font-size-h5 font-weight-bold bg-white-o-30">
-                  {user.fullname[0]}
+                  {user.firsName[0]}
                 </span>
               </span>
             </div>

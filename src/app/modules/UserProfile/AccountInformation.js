@@ -1,17 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, shallowEqual, connect, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ModalProgressBar } from "../../../_metronic/_partials/controls";
-import * as auth from "../Auth";
 
 function AccountInformation(props) {
   // Fields
   const [loading, setloading] = useState(false);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user, shallowEqual);
+  const user = {
+    pic: 'https://st4.depositphotos.com/12982378/22072/i/600/depositphotos_220729084-stock-photo-smiling-adult-man-crossed-arms.jpg',
+    firstName: 'Mohammed',
+    lastName: 'Jaber',
+    occupation: 'React developer',
+    email: 'mohjbr.dev@gmail.com'
+  };
   useEffect(() => {}, [user]);
 
   // Methods
@@ -29,7 +32,7 @@ function AccountInformation(props) {
       },
     });
     // user for update preparation
-    dispatch(props.setUser(updatedUser));
+    // dispatch(props.setUser(updatedUser));
     setTimeout(() => {
       setloading(false);
       setSubmitting(false);
@@ -47,13 +50,13 @@ function AccountInformation(props) {
   };
   // UI Helpers
   const initialValues = {
-    username: user.username,
+    username: user.firstName,
     email: user.email,
     language: user.language,
     timeZone: user.timeZone,
-    communicationEmail: user.communication.email,
-    communicationSMS: user.communication.sms,
-    communicationPhone: user.communication.phone,
+    communicationEmail: user.communication?.email,
+    communicationSMS: user.communication?.sms,
+    communicationPhone: user.communication?.phone,
   };
   const Schema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -376,4 +379,4 @@ function AccountInformation(props) {
     </form>
   );
 }
-export default connect(null, auth.actions)(AccountInformation);
+export default AccountInformation;
