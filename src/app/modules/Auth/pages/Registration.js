@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { connect } from "react-redux";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import { FormattedMessage, injectIntl } from "react-intl";
@@ -13,7 +12,7 @@ const initialValues = {
   username: "",
   password: "",
   changepassword: "",
-  acceptTerms: false,
+  acceptTerms: false
 };
 
 function Registration(props) {
@@ -25,7 +24,7 @@ function Registration(props) {
       .max(50, "Maximum 50 symbols")
       .required(
         intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
+          id: "AUTH.VALIDATION.REQUIRED_FIELD"
         })
       ),
     email: Yup.string()
@@ -34,7 +33,7 @@ function Registration(props) {
       .max(50, "Maximum 50 symbols")
       .required(
         intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
+          id: "AUTH.VALIDATION.REQUIRED_FIELD"
         })
       ),
     username: Yup.string()
@@ -42,7 +41,7 @@ function Registration(props) {
       .max(50, "Maximum 50 symbols")
       .required(
         intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
+          id: "AUTH.VALIDATION.REQUIRED_FIELD"
         })
       ),
     password: Yup.string()
@@ -50,25 +49,23 @@ function Registration(props) {
       .max(50, "Maximum 50 symbols")
       .required(
         intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
+          id: "AUTH.VALIDATION.REQUIRED_FIELD"
         })
       ),
     changepassword: Yup.string()
       .required(
         intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
+          id: "AUTH.VALIDATION.REQUIRED_FIELD"
         })
       )
       .when("password", {
-        is: (val) => (val && val.length > 0 ? true : false),
+        is: val => (val && val.length > 0 ? true : false),
         then: Yup.string().oneOf(
           [Yup.ref("password")],
           "Password and Confirm Password didn't match"
-        ),
+        )
       }),
-    acceptTerms: Yup.bool().required(
-      "You must accept the terms and conditions"
-    ),
+    acceptTerms: Yup.bool().required("You must accept the terms and conditions")
   });
 
   const enableLoading = () => {
@@ -79,7 +76,7 @@ function Registration(props) {
     setLoading(false);
   };
 
-  const getInputClasses = (fieldname) => {
+  const getInputClasses = fieldname => {
     if (formik.touched[fieldname] && formik.errors[fieldname]) {
       return "is-invalid";
     }
@@ -107,12 +104,12 @@ function Registration(props) {
           setSubmitting(false);
           setStatus(
             intl.formatMessage({
-              id: "AUTH.VALIDATION.INVALID_LOGIN",
+              id: "AUTH.VALIDATION.INVALID_LOGIN"
             })
           );
           disableLoading();
         });
-    },
+    }
   });
 
   return (
@@ -290,4 +287,4 @@ function Registration(props) {
   );
 }
 
-export default injectIntl(connect(null, auth.actions)(Registration));
+export default injectIntl(Registration);

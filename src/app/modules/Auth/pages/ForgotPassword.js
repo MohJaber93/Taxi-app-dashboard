@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { injectIntl } from "react-intl";
@@ -8,7 +7,7 @@ import * as auth from "../_redux/authRedux";
 import { requestPassword } from "../_redux/authCrud";
 
 const initialValues = {
-  email: "",
+  email: ""
 };
 
 function ForgotPassword(props) {
@@ -21,12 +20,12 @@ function ForgotPassword(props) {
       .max(50, "Maximum 50 symbols")
       .required(
         intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
+          id: "AUTH.VALIDATION.REQUIRED_FIELD"
         })
-      ),
+      )
   });
 
-  const getInputClasses = (fieldname) => {
+  const getInputClasses = fieldname => {
     if (formik.touched[fieldname] && formik.errors[fieldname]) {
       return "is-invalid";
     }
@@ -54,7 +53,7 @@ function ForgotPassword(props) {
             )
           );
         });
-    },
+    }
   });
 
   return (
@@ -120,4 +119,4 @@ function ForgotPassword(props) {
   );
 }
 
-export default injectIntl(connect(null, auth.actions)(ForgotPassword));
+export default injectIntl(ForgotPassword);
