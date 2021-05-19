@@ -2,19 +2,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SVG from "react-inlinesvg";
-// import { shallowEqual, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toAbsoluteUrl } from "../../../../_helpers";
 
 export function QuickUser() {
   const history = useHistory();
-  // const user = useSelector((state) => state.auth.user, shallowEqual);
   const user = {
-    pic: 'https://st4.depositphotos.com/12982378/22072/i/600/depositphotos_220729084-stock-photo-smiling-adult-man-crossed-arms.jpg',
-    firstName: 'Mohammed',
-    lastName: 'Jaber',
-    occupation: 'React developer',
-    email: 'mohjbr.dev@gmail.com'
+    pic:
+      "https://st4.depositphotos.com/12982378/22072/i/600/depositphotos_220729084-stock-photo-smiling-adult-man-crossed-arms.jpg",
+    firstName: "Mohammed",
+    lastName: "Jaber",
+    occupation: "React developer",
+    email: "mohjbr.dev@gmail.com"
   };
   const logoutClick = () => {
     const toggle = document.getElementById("kt_quick_user_toggle");
@@ -48,7 +47,7 @@ export function QuickUser() {
             <div
               className="symbol-label"
               style={{
-                backgroundImage: `url(${user.pic})`,
+                backgroundImage: `url(${user.pic})`
               }}
             />
             <i className="symbol-badge bg-success" />
