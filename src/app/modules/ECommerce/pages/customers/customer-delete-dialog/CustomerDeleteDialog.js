@@ -1,9 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/customers/customersActions";
-import {useCustomersUIContext} from "../CustomersUIContext";
+import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
+import { useCustomersUIContext } from "../CustomersUIContext";
 
 export function CustomerDeleteDialog({ id, show, onHide }) {
   // Customers UI Context
@@ -16,11 +14,7 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
   }, [customersUIContext]);
 
   // Customers Redux state
-  const dispatch = useDispatch();
-  const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.customers.actionsLoading }),
-    shallowEqual
-  );
+  const isLoading = false;
 
   // if !id we should close modal
   useEffect(() => {
@@ -31,18 +25,18 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
   }, [id]);
 
   // looking for loading/dispatch
-  useEffect(() => {}, [isLoading, dispatch]);
+  useEffect(() => {}, [isLoading]);
 
   const deleteCustomer = () => {
     // server request for deleting customer by id
-    dispatch(actions.deleteCustomer(id)).then(() => {
-      // refresh list after deletion
-      dispatch(actions.fetchCustomers(customersUIProps.queryParams));
-      // clear selections list
-      customersUIProps.setIds([]);
-      // closing delete modal
-      onHide();
-    });
+    // dispatch(actions.deleteCustomer(id)).then(() => {
+    //   // refresh list after deletion
+    //   dispatch(actions.fetchCustomers(customersUIProps.queryParams));
+    //   // clear selections list
+    //   customersUIProps.setIds([]);
+    //   // closing delete modal
+    //   onHide();
+    // });
   };
 
   return (
