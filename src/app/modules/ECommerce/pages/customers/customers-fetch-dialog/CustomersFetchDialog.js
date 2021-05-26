@@ -1,16 +1,15 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
-import { shallowEqual, useSelector } from "react-redux";
 import {
   CustomerStatusCssClasses,
-  CustomerStatusTitles,
+  CustomerStatusTitles
 } from "../CustomersUIHelpers";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
 const selectedCustomers = (entities, ids) => {
   const _customers = [];
-  ids.forEach((id) => {
-    const customer = entities.find((el) => el.id === id);
+  ids.forEach(id => {
+    const customer = entities.find(el => el.id === id);
     if (customer) {
       _customers.push(customer);
     }
@@ -23,20 +22,12 @@ export function CustomersFetchDialog({ show, onHide }) {
   const customersUIContext = useCustomersUIContext();
   const customersUIProps = useMemo(() => {
     return {
-      ids: customersUIContext.ids,
+      ids: customersUIContext.ids
     };
   }, [customersUIContext]);
 
   // Customers Redux state
-  const { customers } = useSelector(
-    (state) => ({
-      customers: selectedCustomers(
-        state.customers.entities,
-        customersUIProps.ids
-      ),
-    }),
-    shallowEqual
-  );
+  const customers = [];
 
   // if customers weren't selected we should close modal
   useEffect(() => {
@@ -67,7 +58,7 @@ export function CustomersFetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {customers.map((customer) => (
+            {customers.map(customer => (
               <tr key={`id${customer.id}`}>
                 <td>{customer.id}</td>
                 <td>
