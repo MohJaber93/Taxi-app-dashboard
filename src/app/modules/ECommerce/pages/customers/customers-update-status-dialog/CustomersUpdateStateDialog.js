@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {
   CustomerStatusCssClasses,
-  CustomerStatusTitles,
+  CustomerStatusTitles
 } from "../CustomersUIHelpers";
 import * as actions from "../../../_redux/customers/customersActions";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
 const selectedCustomers = (entities, ids) => {
   const _customers = [];
-  ids.forEach((id) => {
-    const customer = entities.find((el) => el.id === id);
+  ids.forEach(id => {
+    const customer = entities.find(el => el.id === id);
     if (customer) {
       _customers.push(customer);
     }
@@ -26,21 +25,13 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
     return {
       ids: customersUIContext.ids,
       setIds: customersUIContext.setIds,
-      queryParams: customersUIContext.queryParams,
+      queryParams: customersUIContext.queryParams
     };
   }, [customersUIContext]);
 
   // Customers Redux state
-  const { customers, isLoading } = useSelector(
-    (state) => ({
-      customers: selectedCustomers(
-        state.customers.entities,
-        customersUIProps.ids
-      ),
-      isLoading: state.customers.actionsLoading,
-    }),
-    shallowEqual
-  );
+  const isLoading = false;
+  const customers = [];
 
   // if !id we should close modal
   useEffect(() => {
@@ -52,22 +43,21 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
 
   const [status, setStatus] = useState(0);
 
-  const dispatch = useDispatch();
   const updateStatus = () => {
     // server request for update customers status by selected ids
-    dispatch(actions.updateCustomersStatus(customersUIProps.ids, status)).then(
-      () => {
-        // refresh list after deletion
-        dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(
-          () => {
-            // clear selections list
-            customersUIProps.setIds([]);
-            // closing delete modal
-            onHide();
-          }
-        );
-      }
-    );
+    // dispatch(actions.updateCustomersStatus(customersUIProps.ids, status)).then(
+    //   () => {
+    //     // refresh list after deletion
+    //     dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(
+    //       () => {
+    //         // clear selections list
+    //         customersUIProps.setIds([]);
+    //         // closing delete modal
+    //         onHide();
+    //       }
+    //     );
+    //   }
+    // );
   };
 
   return (
@@ -98,7 +88,7 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {customers.map((customer) => (
+            {customers.map(customer => (
               <tr key={`id${customer.id}`}>
                 <td>{customer.id}</td>
                 <td>
@@ -126,7 +116,7 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
           <select
             className="form-control"
             value={status}
-            onChange={(e) => setStatus(+e.target.value)}
+            onChange={e => setStatus(+e.target.value)}
           >
             <option value="0">Suspended</option>
             <option value="1">Active</option>
