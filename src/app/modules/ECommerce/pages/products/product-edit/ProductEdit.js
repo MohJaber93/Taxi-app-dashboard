@@ -1,13 +1,11 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,jsx-a11y/role-supports-aria-props */
 import React, { useEffect, useState, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { shallowEqual, useSelector } from "react-redux";
 import * as actions from "../../../_redux/products/productsActions";
 import {
   Card,
   CardBody,
   CardHeader,
-  CardHeaderToolbar,
+  CardHeaderToolbar
 } from "../../../../../../_metronic/_partials/controls";
 import { ProductEditForm } from "./ProductEditForm";
 import { Specifications } from "../product-specifications/Specifications";
@@ -28,14 +26,14 @@ const initProduct = {
   price: 10000,
   condition: 1,
   status: 0,
-  VINCode: "",
+  VINCode: ""
 };
 
 export function ProductEdit({
   history,
   match: {
-    params: { id },
-  },
+    params: { id }
+  }
 }) {
   // Subheader
   const suhbeader = useSubheader();
@@ -43,19 +41,13 @@ export function ProductEdit({
   // Tabs
   const [tab, setTab] = useState("basic");
   const [title, setTitle] = useState("");
-  const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
-  const { actionsLoading, productForEdit } = useSelector(
-    (state) => ({
-      actionsLoading: state.products.actionsLoading,
-      productForEdit: state.products.productForEdit,
-    }),
-    shallowEqual
-  );
+  const actionsLoading = false;
+  const productForEdit = null;
 
   useEffect(() => {
-    dispatch(actions.fetchProduct(id));
-  }, [id, dispatch]);
+    // dispatch(actions.fetchProduct(id));
+  }, [id]);
 
   useEffect(() => {
     let _title = id ? "" : "New Product";
@@ -68,15 +60,15 @@ export function ProductEdit({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productForEdit, id]);
 
-  const saveProduct = (values) => {
+  const saveProduct = values => {
     if (!id) {
-      dispatch(actions.createProduct(values)).then(() => backToProductsList());
+      // dispatch(actions.createProduct(values)).then(() => backToProductsList());
     } else {
-      dispatch(actions.updateProduct(values)).then(() => backToProductsList());
+      // dispatch(actions.updateProduct(values)).then(() => backToProductsList());
     }
   };
 
-  const btnRef = useRef();  
+  const btnRef = useRef();
   const saveProductClick = () => {
     if (btnRef && btnRef.current) {
       btnRef.current.click();
