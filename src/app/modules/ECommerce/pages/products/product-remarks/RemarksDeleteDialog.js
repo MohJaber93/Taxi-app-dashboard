@@ -1,9 +1,7 @@
 /* eslint-disable no-restricted-imports */
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/remarks/remarksActions";
 import { useRemarksUIContext } from "./RemarksUIContext";
 
 export function RemarksDeleteDialog() {
@@ -16,17 +14,13 @@ export function RemarksDeleteDialog() {
       productId: remarksUIContext.productId,
       queryParams: remarksUIContext.queryParams,
       showDeleteRemarksDialog: remarksUIContext.showDeleteRemarksDialog,
-      closeDeleteRemarksDialog: remarksUIContext.closeDeleteRemarksDialog,
+      closeDeleteRemarksDialog: remarksUIContext.closeDeleteRemarksDialog
     };
   }, [remarksUIContext]);
 
-  const dispatch = useDispatch();
-  const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.remarks.actionsLoading }),
-    shallowEqual
-  );
+  const isLoading = false;
 
-  useEffect(() => {}, [isLoading, dispatch]);
+  useEffect(() => {}, [isLoading]);
   useEffect(() => {
     if (!remarksUIProps.ids || remarksUIProps.ids.length === 0) {
       remarksUIProps.closeDeleteRemarksDialog();
@@ -35,17 +29,17 @@ export function RemarksDeleteDialog() {
   }, [remarksUIProps.ids]);
 
   const deleteRemarks = () => {
-    dispatch(actions.deleteRemarks(remarksUIProps.ids)).then(() => {
-      dispatch(
-        actions.fetchRemarks(
-          remarksUIProps.queryParams,
-          remarksUIProps.productId
-        )
-      ).then(() => {
-        remarksUIProps.setIds([]);
-        remarksUIProps.closeDeleteRemarksDialog();
-      });
-    });
+    // dispatch(actions.deleteRemarks(remarksUIProps.ids)).then(() => {
+    //   dispatch(
+    //     actions.fetchRemarks(
+    //       remarksUIProps.queryParams,
+    //       remarksUIProps.productId
+    //     )
+    //   ).then(() => {
+    //     remarksUIProps.setIds([]);
+    //     remarksUIProps.closeDeleteRemarksDialog();
+    //   });
+    // });
   };
 
   return (
