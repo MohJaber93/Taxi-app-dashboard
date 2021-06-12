@@ -1,19 +1,13 @@
 /* eslint-disable no-restricted-imports */
 import React, { useState, useEffect } from "react";
-import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { ModalProgressBar } from "../../../../../../../_metronic/_partials/controls";
 
 export function RemarkEditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Remarks Redux state
-  const { remarkForEdit, actionsLoading } = useSelector(
-    (state) => ({
-      remarkForEdit: state.remarks.remarkForEdit,
-      actionsLoading: state.remarks.actionsLoading,
-    }),
-    shallowEqual
-  );
+  const actionsLoading = false;
+  const remarkForEdit = null;
 
   useEffect(() => {
     let _title = id ? "" : "New Remark";
