@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-imports */
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import * as actions from "../../../_redux/specifications/specificationsActions";
 import { useSpecificationsUIContext } from "./SpecificationsUIContext";
@@ -16,16 +15,12 @@ export function SpecificationDeleteDialog() {
       show: specsUIContext.showDeleteSpecificationDialog,
       onHide: specsUIContext.closeDeleteSpecificationDialog,
       queryParams: specsUIContext.queryParams,
-      setIds: specsUIContext.setIds,
+      setIds: specsUIContext.setIds
     };
   }, [specsUIContext]);
 
   // Specs Redux state
-  const dispatch = useDispatch();
-  const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.specifications.actionsLoading }),
-    shallowEqual
-  );
+  const isLoading = false;
 
   // if !id we should close modal
   useEffect(() => {
@@ -36,21 +31,21 @@ export function SpecificationDeleteDialog() {
   }, [specsUIProps.id]);
 
   // looking for loading/dispatch
-  useEffect(() => {}, [isLoading, dispatch]);
+  useEffect(() => {}, [isLoading]);
 
   const deleteSpecification = () => {
     // server request for deleting spec by id
-    dispatch(actions.deleteSpecification(specsUIProps.id)).then(() => {
-      // refresh list after deletion
-      dispatch(
-        actions.fetchSpecifications(
-          specsUIProps.queryParams,
-          specsUIProps.productId
-        )
-      );
-      specsUIProps.setIds([]);
-      specsUIProps.onHide();
-    });
+    // dispatch(actions.deleteSpecification(specsUIProps.id)).then(() => {
+    //   // refresh list after deletion
+    //   dispatch(
+    //     actions.fetchSpecifications(
+    //       specsUIProps.queryParams,
+    //       specsUIProps.productId
+    //     )
+    //   );
+    //   specsUIProps.setIds([]);
+    //   specsUIProps.onHide();
+    // });
   };
 
   return (
