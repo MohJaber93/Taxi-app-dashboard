@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-imports */
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import * as actions from "../../../_redux/specifications/specificationsActions";
 import { useSpecificationsUIContext } from "./SpecificationsUIContext";
@@ -16,19 +15,15 @@ export function SpecificationsDeleteDialog() {
       show: specsUIContext.showDeleteSpecificationsDialog,
       onHide: specsUIContext.closeDeleteSpecificationsDialog,
       setIds: specsUIContext.setIds,
-      queryParams: specsUIContext.queryParams,
+      queryParams: specsUIContext.queryParams
     };
   }, [specsUIContext]);
 
   // Specs Redux state
-  const dispatch = useDispatch();
-  const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.specifications.actionsLoading }),
-    shallowEqual
-  );
+  const isLoading = false;
 
   // looking for loading/dispatch
-  useEffect(() => {}, [isLoading, dispatch]);
+  useEffect(() => {}, [isLoading]);
 
   // if there weren't selected specs we should close modal
   useEffect(() => {
@@ -40,18 +35,18 @@ export function SpecificationsDeleteDialog() {
 
   const deleteSpecifications = () => {
     // server request for selected deleting specs
-    dispatch(actions.deleteSpecifications(specsUIProps.ids)).then(() => {
-      // refresh list after deletion
-      dispatch(
-        actions.fetchSpecifications(
-          specsUIProps.queryParams,
-          specsUIProps.productId
-        )
-      ).then(() => {
-        specsUIProps.setIds([]);
-        specsUIProps.onHide();
-      });
-    });
+    // dispatch(actions.deleteSpecifications(specsUIProps.ids)).then(() => {
+    //   // refresh list after deletion
+    //   dispatch(
+    //     actions.fetchSpecifications(
+    //       specsUIProps.queryParams,
+    //       specsUIProps.productId
+    //     )
+    //   ).then(() => {
+    //     specsUIProps.setIds([]);
+    //     specsUIProps.onHide();
+    //   });
+    // });
   };
 
   return (
