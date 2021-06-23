@@ -1,9 +1,7 @@
 /* eslint-disable no-restricted-imports */
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/products/productsActions";
 import { useProductsUIContext } from "../ProductsUIContext";
 
 export function ProductsDeleteDialog({ show, onHide }) {
@@ -13,19 +11,14 @@ export function ProductsDeleteDialog({ show, onHide }) {
     return {
       ids: productsUIContext.ids,
       setIds: productsUIContext.setIds,
-      queryParams: productsUIContext.queryParams,
+      queryParams: productsUIContext.queryParams
     };
   }, [productsUIContext]);
 
   // Products Redux state
-  const dispatch = useDispatch();
-  const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.products.actionsLoading }),
-    shallowEqual
-  );
-
+  const isLoading = false;
   // looking for loading/dispatch
-  useEffect(() => {}, [isLoading, dispatch]);
+  useEffect(() => {}, [isLoading]);
 
   // if there weren't selected products we should close modal
   useEffect(() => {
@@ -37,15 +30,15 @@ export function ProductsDeleteDialog({ show, onHide }) {
 
   const deleteProducts = () => {
     // server request for deleting product by seleted ids
-    dispatch(actions.deleteProducts(productsUIProps.ids)).then(() => {
-      // refresh list after deletion
-      dispatch(actions.fetchProducts(productsUIProps.queryParams)).then(() => {
-        // clear selections list
-        productsUIProps.setIds([]);
-        // closing delete modal
-        onHide();
-      });
-    });
+    // dispatch(actions.deleteProducts(productsUIProps.ids)).then(() => {
+    //   // refresh list after deletion
+    //   dispatch(actions.fetchProducts(productsUIProps.queryParams)).then(() => {
+    //     // clear selections list
+    //     productsUIProps.setIds([]);
+    //     // closing delete modal
+    //     onHide();
+    //   });
+    // });
   };
 
   return (
