@@ -2,7 +2,6 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/specifications/specificationsActions";
 import { useSpecificationsUIContext } from "./SpecificationsUIContext";
 
 export function SpecificationsDeleteDialog() {
